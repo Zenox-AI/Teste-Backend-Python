@@ -51,7 +51,8 @@ ROBOTSTXT_OBEY = True
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    "scraping.middlewares.RandomUserAgentMiddleware": 100,
+    "scraping.middlewares.RandomUserAgentMiddleware": 200,
+    "scraping.middlewares.RandomProxyMiddleware": 100,
 }
 
 # Enable or disable extensions
@@ -101,4 +102,11 @@ USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
     # iPhone X Safari
     "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
+]
+
+PROXIES = [
+    'http://20.206.106.192:8123',
+    'http://177.12.118.160:80',
+    'http://138.204.95.166:8080',
+    'http://191.243.46.162:43241'
 ]
