@@ -7,6 +7,7 @@ import scrapy
 
 
 class ScrapingItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    nameCountry = scrapy.Field()
+    capitalCountry = scrapy.Field()
+    populationCountry = scrapy.Field()
+    areaCountry = scrapy.Field()

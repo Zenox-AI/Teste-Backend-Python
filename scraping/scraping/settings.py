@@ -63,9 +63,10 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "scraping.pipelines.ScrapingPipeline": 300,
-#}
+ITEM_PIPELINES = {
+    "scraping.pipelines.DataProcessingPipeline": 300,
+    "scraping.pipelines.KafkaPipeline": 400,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -105,8 +106,11 @@ USER_AGENTS = [
 ]
 
 PROXIES = [
-    'http://20.206.106.192:8123',
-    'http://177.12.118.160:80',
-    'http://138.204.95.166:8080',
-    'http://191.243.46.162:43241'
+    'http://181.191.94.126:8999',
+    'http://201.91.82.155:3128',
+    'http://191.243.46.162:43241',
+    'http://20.206.106.192:80',
 ]
+
+KAFKA_BROKER = 'localhost:9092'
+KAFKA_TOPIC = 'scraping'
