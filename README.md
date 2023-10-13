@@ -3,68 +3,55 @@
 
 # Desafio Backend Python
 
-**Objetivo:** Implementar um scraper web em Python para coletar dados da página web "Scrape This Site", estruturar esses dados em JSON, e enviá-los para uma fila Kafka.
+**Objetivo:** O sistema consiste em um crawler que coleta dados de países de um site e os envia para uma fila no Kafka, no qual pode ser visualizado através de uma aplicação feita com streamlit.
 
-**Requisitos:**
+## Detalhes tecnicos
 
-1. Coleta de Dados:
+**Funcionamento do Crawler**
 
- - Faça o scraping do site https://www.scrapethissite.com/pages/simple/.
- - Colete os dados de todos os países listados, focando especificamente nos dados de população.
+ - O crawler é executado manualmente, coletando os dados de países do site https://www.scrapethissite.com/pages/simple/ e os envia para uma fila no Kafka.
+ - O crawler conta com um sistema de proxies rotativos, que são utilizados para evitar o bloqueio do site. (OBS: O crawler pode apresentar lentidão devido a utilização de proxies gratuitos)
+ - O crawler conta com um sistema de User-Agent rotativos, que também são utilizados para evitar o bloqueio do site.
 
-2. Estruturação dos Dados:
+**Integração com Kafka**:
 
- - Estruture os dados coletados em JSON.
- - Utilize classes ou dicionários em Python para representar a estrutura dos dados. A estrutura deve conter, no mínimo, os campos: "País" e "População".
+ - O crawler envia os dados para uma fila no Kafka, que é consumida pela aplicação feita com streamlit.
+ - O Kafka foi configurado utilizando o docker-compose, para facilitar a execução do projeto.
 
-3. Integração com Kafka:
+**Aplicação com streamlit**:
 
- - Envie os dados estruturados para uma fila no Kafka.
- - Providencie o arquivo Docker (Dockerfile e docker-compose, se aplicável) do Kafka utilizado no teste.
+ - A aplicação feita com streamlit consome os dados da fila no Kafka e os exibe em uma tabela além de apresentar um gráfico demonstrando o países com maiores densidades demográficas.
 
+## Instalação
 
-**Diferenciais:**
+**Pré-requisitos:**
 
-- Implemente lógicas e algoritmos para evitar o bloqueio do scraper, como:
-   - Uso de proxies rotativos.
-   - Intervals variáveis entre as requisições.
-   - Identificação e manipulação de headers (User-Agent) para simular diferentes browsers ou dispositivos.
+ - Docker Compose
+ - Python 3
+ - Pip
+ - Git
 
-**O que será avaliado:**
+**Instalação:**
 
-1. Qualidade do código e organização.
-2. Capacidade de definir e utilizar classes ou dicionários em Python.
-3. Integração com Kafka e a correta configuração do ambiente Docker para o Kafka.
-4. Implementação dos diferenciais (se aplicável).
-5. Documentação do código e instruções para execução.
+ - Clone o repositório
+    - `git clone git@github.com:MauroTony/Teste-Backend-Python.git`
+    - `cd Teste-Backend-Python`
+    - `git checkout main`
+ - Execute o docker-compose
+    - `docker-compose up -d`
+ - Instale as dependências do projeto
+    - `pip install -r requirements.txt`
+ - Configue as variáveis de ambiente
+    - Valide que a .env existe na raiz do projeto
+    - Valide a existencia da variável de ambiente KAFKA_HOST e KAFKA_PORT e configure-as caso necessário
+   
+**Execução:**
 
-**Instruções para a entrega:**
-
-1. O candidato deve dar fork neste repositório e após o termino do desenvolvimento, realizar um pull request para análise do time.
-2. Inclua um README com instruções claras sobre como executar e testar o projeto.
-
----
-#### LICENSE
-```
-MIT License
-
-Copyright (c) 2016 ZenoX IA
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+ - Inicialize o kafka
+    - `docker-compose up -d`
+ - Inicialize o streamlit
+    - `streamlit run streamlit-frontend.py`
+ - Execute o crawler
+    - `cd scraping`
+    - `python runCrawler.py`
+ 

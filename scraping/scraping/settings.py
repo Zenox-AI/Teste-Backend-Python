@@ -6,7 +6,7 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-from config import get_config
+# from config import get_config
 
 BOT_NAME = "scraping"
 
@@ -110,10 +110,7 @@ PROXIES = [
     'http://181.191.94.126:8999',
     'http://201.91.82.155:3128',
     'http://191.243.46.162:43241',
-    'http://20.206.106.192:80',
 ]
 
 KAFKA_BROKER = 'localhost:9092'
 KAFKA_TOPIC = 'scraping'
-LOG_LEVEL = 'INFO'
-LOG_FILE = 'my_spider.log'
