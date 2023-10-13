@@ -13,7 +13,6 @@ class CountriesSpider(scrapy.Spider):
 
     def parse(self, response):
         self.logger.info("User-Agent: " + response.request.headers['User-Agent'].decode('utf-8'))
-        self.logger.info("Proxy: " + response.request.meta['proxy'])
         self.logger.info("Response status: " + str(response.status))
         self.logger.info("Coletando dados...")
 
