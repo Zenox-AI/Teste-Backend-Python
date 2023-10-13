@@ -6,6 +6,7 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+from config import get_config
 
 BOT_NAME = "scraping"
 
@@ -52,7 +53,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     "scraping.middlewares.RandomUserAgentMiddleware": 200,
-    "scraping.middlewares.RandomProxyMiddleware": 100,
+   # "scraping.middlewares.RandomProxyMiddleware": 100,
 }
 
 # Enable or disable extensions
@@ -112,5 +113,5 @@ PROXIES = [
     'http://20.206.106.192:80',
 ]
 
-KAFKA_BROKER = 'localhost:9092'
-KAFKA_TOPIC = 'scraping'
+KAFKA_BROKER = get_config().KAFKA_BROKER
+KAFKA_TOPIC = get_config().KAFKA_TOPIC
