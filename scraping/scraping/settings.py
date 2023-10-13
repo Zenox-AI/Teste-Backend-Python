@@ -113,5 +113,7 @@ PROXIES = [
     'http://20.206.106.192:80',
 ]
 
-KAFKA_BROKER = get_config().KAFKA_BROKER
-KAFKA_TOPIC = get_config().KAFKA_TOPIC
+KAFKA_BROKER = 'localhost:9092'
+KAFKA_TOPIC = 'scraping'
+LOG_LEVEL = 'INFO'
+LOG_FILE = 'my_spider.log'
