@@ -53,7 +53,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     "scraping.middlewares.RandomUserAgentMiddleware": 200,
-   # "scraping.middlewares.RandomProxyMiddleware": 100,
+   "scraping.middlewares.RandomProxyMiddleware": 100,
 }
 
 # Enable or disable extensions
